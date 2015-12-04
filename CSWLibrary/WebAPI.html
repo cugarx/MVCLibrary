@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="Scripts/modernizr-2.6.2.js"></script>
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: white">
+        <div class="container" style="background-color: white">
+            <div class="navbar-header">                
+                <img src="/Images/logo.png" onclick="location.href='http://cswsolutions.com'" style="cursor:pointer; float:left; margin-right: 100px;" />
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/Home/index" class="navbar-brand">Library Application</a>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="container body-content">
+        <table id="tblList" class="table table-bordered table-hover" width="500">
+            <thead>
+                <tr>
+                    <th>Data retrieved for web API</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    </body>
+</html>
+    <script type="text/javascript">
+    $(document).on("ready", function () {
+        GetBooks();
+    })
+
+    //Get all books
+    function GetBooks() {
+        var item = "";
+        var aleatorio = Math.random();
+        var obj;
+        $('#tblList tbody').html('');
+        $.ajax({ //Comunicación jQuery hacia ASPX
+            type: "GET",
+            url: "/api/BooksAPI/GetBooks",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (respuesta) {
+                obj = respuesta;
+                obj = obj.replace(/{/g, '');
+                obj = obj.replace(/\[/g, '');
+                obj = obj.replace(/]/g, '');
+                obj = obj.replace(/\"/g, '');
+                var registros = obj.split("},");
+                $('#tblList tbody').append("<table width='500' border='1'><tr><td>ISBN</td><td>Title</td><td>Publisher</td><td>Description</td></tr>");
+                for (i = 0; i < registros.length; i++)
+                {
+                    var fields = registros[i].split(",");
+                    $('#tblList tbody').append("<tr>");
+                    for (j = 0; j < fields.length; j++)
+                        if(fields[j].toString().indexOf("Id")==-1)
+                            $('#tblList tbody').append("<td>" + fields[j].split(":")[1] + "</td>");
+                    $('#tblList tbody').append("</tr>");
+                }
+                $('#tblList tbody').append("</table>");
+            }
+        });
+    };
+
+
+    </script>

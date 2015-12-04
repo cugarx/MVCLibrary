@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<br />
+<div class="jumbotron">
+    <p class="lead">Welcome to my testing web application, this app has been developed using MVC 5, EF 6 and some functionality on Web Api.</p>
+    <div style="float:left"><h4>Please Enjoy it!</h4></div>
+    <div style="width: 100%;font-size : 12px; text-align: right; font-style: italic">
+        <img src="~/Images/coding.png" width="100"/>
+        Transformando ideas con Tecnología - Raúl Cuevas
+    </div>
+</div>
+
+<div class="row" style="color:white; min-height: 200px;">
+    <div style="background:#77A22F; width:33%; float:left;padding: 1px;margin-right:1%;">
+        &nbsp;Books Managment
+        <div style="width: 100%; border-left: 1px solid silver; border-bottom: 1px solid silver; border-right: 1px solid silver; background-color:white; color: black;padding: 10px;">
+            In this section you can manage the books, you can add or edit books information and assign authors and categories.
+            <br /><br />            
+            <div style="width:100%;text-align:right">
+                @Html.ActionLink("Go to Books section", "Index", "Books") &#8594;
+            </div>
+            <br />
+            <div style="width:100%;text-align:right">
+                <a href="~/webApi.html">Web API Book</a> &#8594;
+            </div>
+            <br />
+        </div>
+    </div>
+    <div style="background:#017DC3; width:33%; float:left;padding: 1px; margin-right:1%;">
+        &nbsp;Authors
+        <div style="width: 100%; border-left: 1px solid silver; border-bottom: 1px solid silver; border-right: 1px solid silver; background-color:white; color: black;padding: 10px;">
+            In this section you can manage the authors catalog, mainly CRUD operations are available for you, be free to edit it.
+            <br /><br />
+            <div style="width:100%;text-align:right">
+                @Html.ActionLink("Go to Authors section", "Index", "Authors") &#8594;
+            </div>
+            <br />
+        </div>
+    </div>
+    <div style="background:#F5911F; width:32%; float:left;padding: 1px;">
+        &nbsp;Categories
+        <div style="width: 100%; border-left: 1px solid silver; border-bottom: 1px solid silver; border-right: 1px solid silver; background-color:white; color: black;padding: 10px;">
+            In this section you can manage the categories catalog, mainly CRUD operations are available for you, be free to edit it.
+            <br /><br />
+            <div style="width:100%;text-align:right">
+                @Html.ActionLink("Go to Categories section", "Index", "Categories") &#8594;
+            </div>
+            <br />
+        </div>
+    </div>
+</div>

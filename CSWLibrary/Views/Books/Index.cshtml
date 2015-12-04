@@ -1,0 +1,80 @@
+﻿@model IEnumerable<CSWLibrary.Book>
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<br /><br />
+<script>
+    function CallChangefunc(idAuthor)
+{
+        window.location.href = "/Books/Index?idAuthor=" + idAuthor;
+}
+</script>
+<p>
+    @Html.ActionLink("+ Add Book", "Create") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+
+
+        Filter by: &nbsp;
+          @Html.DropDownList("Autores", ViewBag.Authors as SelectList,
+                    "Todos", new { @onchange = "CallChangefunc(this.value)" })
+</p>
+<br />
+<table class="TableStyle" style="width: 90%">
+    <tr>
+        <td style="font-weight: normal">
+            @Html.DisplayNameFor(model => model.ISBN)
+        </td>
+        <td style="font-weight: normal">
+            @Html.DisplayNameFor(model => model.Title)
+        </td>
+        <td style="font-weight: normal">
+            @Html.DisplayNameFor(model => model.Publisher)
+        </td>
+        <td style="font-weight: normal">
+            @Html.DisplayNameFor(model => model.Description)
+        </td>
+        <td style="font-weight: normal">
+            Autor
+        </td>
+        <td style="font-weight: normal">
+            Categoría
+        </td>
+        <td colspan="2"></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>         
+            <td style="text-align:center">
+                <a href='@Url.Action("Edit", "Books", new { id=item.Id })'>
+                    <img src='@Url.Content("~/Images/Editar.png")' />
+                </a>
+            </td>
+            <td style="text-align:center">
+                <a href='@Url.Action("Delete", "Books", new { id=item.Id })'>
+                    <img src='@Url.Content("~/Images/delete.gif")' />
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

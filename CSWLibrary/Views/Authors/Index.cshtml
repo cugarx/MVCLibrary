@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CSWLibrary.Author>
+
+@{
+    ViewBag.Title = "Authors";
+}
+<br /><br />
+
+<p>
+    @Html.ActionLink("+ Add Author", "Create")
+</p>
+<br />
+<table class="TableStyle" style="width: 60%">
+    <tr>
+        <td style="font-weight: normal">
+            @Html.DisplayNameFor(model => model.Name)
+        </td>
+        <td style="font-weight: normal">
+            Last Name
+        </td>
+        <td style="font-weight: normal">
+            Country
+        </td>
+        <td colspan="2"></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td style="text-align:center">
+                <img src='/Images/flags/@Html.DisplayFor(modelItem => item.Country.Code)' />
+            </td>
+          
+            <td style="text-align:center">
+                <a href='@Url.Action("Edit", "Authors", new { id=item.Id })'>
+                    <img src='@Url.Content("~/Images/Editar.png")' />
+                </a>             
+            </td>
+            <td style="text-align:center">
+                <a href='@Url.Action("Delete", "Authors", new { id=item.Id })'>
+                    <img src='@Url.Content("~/Images/delete.gif")' />
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

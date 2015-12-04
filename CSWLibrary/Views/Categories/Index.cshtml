@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CSWLibrary.Category>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<br /><br />
+<p>
+    <input type="button" value="Add Category" style="display: none" onclick="location.href='@Url.Action("Create", "Categories")'" />
+    @Html.ActionLink(" + Add Category", "Create")
+</p>
+<br/>
+<table class="TableStyle" style="width: 40%">
+    <tr>
+        <td style="font-weight: normal">
+            Category Name
+        </td>
+        <td sstyle="width: 100px;"></td>
+        <td sstyle="width: 100px;"></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>          
+            <td style="text-align:center">
+                <a href='@Url.Action("Edit", "Categories", new { id=item.Id })'>
+                    <img src='@Url.Content("~/Images/Editar.png")' />
+                </a>
+            </td>
+            <td style="text-align:center">
+                <a href='@Url.Action("Delete", "Categories", new { id=item.Id })'>
+                    <img src='@Url.Content("~/Images/delete.gif")' />
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
