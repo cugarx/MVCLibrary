@@ -27,12 +27,7 @@
     <br /><br />
     <div class="container body-content">
         <table id="tblList" class="table table-bordered table-hover" width="500">
-            <thead>
-                <tr>
-                    <th>Data retrieved for web API</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+
         </table>
     </div>
     </body>
@@ -47,7 +42,7 @@
         var item = "";
         var aleatorio = Math.random();
         var obj;
-        $('#tblList tbody').html('');
+        $('#tblList').html('');
         $.ajax({ //Comunicación jQuery hacia ASPX
             type: "GET",
             url: "/api/BooksAPI/GetBooks",
@@ -60,7 +55,7 @@
                 obj = obj.replace(/]/g, '');
                 obj = obj.replace(/\"/g, '');
                 var registros = obj.split("},");
-                $('#tblList tbody').append("<table width='500' border='1'><tr><td>ISBN</td><td>Title</td><td>Publisher</td><td>Description</td></tr>");
+                $('#tblList').append("<table width='500' border='1' class='TableStyle'><tr><td>ISBN</td><td>Title</td><td>Publisher</td><td>Description</td></tr>");
                 for (i = 0; i < registros.length; i++)
                 {
                     var fields = registros[i].split(",");
